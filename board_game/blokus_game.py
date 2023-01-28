@@ -1,6 +1,6 @@
 from game_ui import Game_Ui
 from board import Board
-from polyomino import polyominoes
+from player import  Player
 
 class Blokus(object):
     def __init__(self):
@@ -15,15 +15,19 @@ class Blokus(object):
         #initialize board game
         self.board = Board(mode=mode)
         self.ui.grid.addWidget(self.board.ui, 0, 0)
-        self.ui.update()
+
         self.ui.layers.setCurrentIndex(1)
 
         #initialize players
         if mode=='duo':
-            self.players_moves = [[],[]]
-            self.players_polyominoes = [polyominoes, polyominoes]
+            self.players = [Player() for i in range(2)]
         else:
-            self.players_moves = [[], [],[],[]]
-            self.players_polyominoes = [polyominoes, polyominoes, polyominoes, polyominoes]
+            self.players = [Player() for i in range(4)]
+
+        for i in range(5):
+            for polyomino in self.players[0].hands[i]:
+                self.ui.player_hand_scene.addPolygon(polyomino.graphic_items[0])
+
+        self.ui.update()
 
 

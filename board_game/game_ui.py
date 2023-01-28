@@ -56,18 +56,23 @@ class Game_Ui(QtWidgets.QWidget):
 
         # Game view
         self.grid = QtWidgets.QGridLayout()
-        self.grid.setColumnMinimumWidth(0,810)
-        self.grid.setRowMinimumHeight(0,810)
+        self.grid.setColumnMinimumWidth(0,600)
+        self.grid.setRowMinimumHeight(0,600)
 
-
+        self.board_scene = QtWidgets.QGraphicsScene()
+        board_view = QtWidgets.QGraphicsView(self.board_scene, self)
+        self.grid.addWidget(board_view, 1, 0)
 
         label = QtWidgets.QLabel('Information')
         label.setAlignment(Qt.AlignCenter)
         self.grid.addWidget(label, 0, 1)
 
-        label = QtWidgets.QLabel('Polyomino')
-        label.setAlignment(Qt.AlignCenter)
-        self.grid.addWidget(label, 1, 0)
+
+        self.player_hand_scene = QtWidgets.QGraphicsScene()
+        player_hand_view = QtWidgets.QGraphicsView(self.player_hand_scene, self)
+        # player_hand_view.setFixedSize(400,200)
+        self.grid.addWidget(player_hand_view, 1, 0)
+        self.grid.setRowMinimumHeight(1, 300)
 
         label = QtWidgets.QLabel('others')
         label.setAlignment(Qt.AlignCenter)
